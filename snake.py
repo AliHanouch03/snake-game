@@ -2,12 +2,17 @@ from turtle import Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 
 class Snake:
     def __init__(self):
         self.segments = []
         self.create_snake()
+        self.head = self.segments[0]
 
     def create_snake(self):
         for position in STARTING_POSITIONS:  # sets up the body of the snake
@@ -17,8 +22,22 @@ class Snake:
             new_segment.goto(position)
             self.segments.append(new_segment)
 
-    def turn_left(self):
-        self.segments[0].left(90)
+    # Controls the snake
+    def up(self):
+        if self.head.heading() != DOWN: # heading() is a method from turtle, look it up on chatgpt for more details
+            self.head.setheading(UP) # sets the heading towards the north
+
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN) # sets the heading towards the south
+
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT) # sets the heading towards the west
+
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT) # sets the heading towards the east
 
     def move(self):
         # Each segment of the snake takes the place of the segment in front of it starting from the end of the snake and
@@ -29,7 +48,7 @@ class Snake:
             x_cor = self.segments[seg_num - 1].xcor()  # storing the x coordinate of the front snake segment in this variable
             y_cor = self.segments[seg_num - 1].ycor()  # storing the y coordinate of the front snake segment in this variable
             self.segments[seg_num].goto(x=x_cor, y=y_cor)  # take the targeted segment to the new position
-        self.segments[0].forward(MOVE_DISTANCE)  # Moves the head 20 pixels to the front
+        self.head.forward(MOVE_DISTANCE)  # Moves the head 20 pixels to the front
 
 
 
