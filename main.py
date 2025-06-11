@@ -7,7 +7,6 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor('black')
 screen.title("My Snake Game")
-snake_segments = []
 
 # create a snake
 snake = Snake()
